@@ -1,0 +1,185 @@
+package data_structure;
+
+import java.io.*;
+
+class Node
+{
+    public int data;
+    public Node next;
+    public Node(int matric)
+    {
+        data=matric;
+    }
+    public void displayNode()
+    {
+        System.out.print(data+"  ");
+    }
+}
+class LinkList
+{
+    private Node first;
+    private Node last;
+    public LinkList()
+    {
+        first=null;
+        last=null;
+    }
+    public void insertLast(int matric)
+    {
+        Node newNode=new Node(matric);
+        newNode.next=null;
+        if(isEmpty())
+            first=newNode;
+        else
+            last.next=newNode;
+        last=newNode;
+    }
+    public int deleteFirst()
+    {
+        int t=first.data;
+        if(first.next==null)
+            last=null;
+        first=first.next;
+        return t;
+    }
+    public int peekFirst()
+    {
+        return(first.data);
+    }
+    
+    public int peekLast() {
+    	return(last.data);
+    }
+    public boolean isEmpty()
+    {
+        return(first==null);
+    }
+    //display all students
+    public void displayList()
+    {
+        Node current=first;
+        while(current!=null)
+        {
+            current.displayNode();
+            current=current.next;
+        }
+    }
+}
+class Queue
+{
+    private LinkList matricNum;
+    public Queue()
+    {
+    	matricNum=new LinkList();
+    }
+    public void insert(int d)
+    {
+    	matricNum.insertLast(d);
+        System.out.println("Inserted");
+    }
+    public int delete()
+    {
+        return matricNum.deleteFirst();
+    }
+    public boolean isQueueEmpty()
+    {
+        return matricNum.isEmpty();
+    }
+    public void display()
+    {
+    	matricNum.displayList();
+    }
+    public int peek()
+    {
+        return matricNum.peekFirst();
+    }
+    public int peekLast() {
+    	return matricNum.peekLast();
+    }
+}
+
+public class QueueInLinkedList {
+	public static void main(String args[])throws IOException
+    {
+        Queue queue=new Queue();
+        int ch,d;
+        while((boolean)true)
+        {
+            BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("MENU");
+            System.out.println("_________________");
+            System.out.println("1.Add New Student");
+            System.out.println("2.Delete Student");
+            System.out.println("3.First Student");
+            System.out.println("4.Last Student ");
+            System.out.println("5.Display All Student");
+            System.out.println("Enter Your Option: ");
+            ch=Integer.parseInt(br.readLine());
+            if(ch==6)
+                break;
+            else
+            {
+                switch(ch)
+                {
+                case 1:
+                    System.out.println("Amount of Element to Enter : ");
+                    int amount=Integer.parseInt(br.readLine());
+                    System.out.println("\nEnter elements: ");
+                    for(int i=0; i<amount; i++)
+                    {
+                        d=Integer.parseInt(br.readLine());
+                        queue.insert(d);
+                    }
+ 
+                    break;
+                case 2:
+                    if(queue.isQueueEmpty())
+                        System.out.println("Queue is Empty ");
+                    else
+                    {
+                        d=queue.delete();
+                        System.out.println("Removed Student :  "+d);
+                    }
+                    break;
+                case 3:
+                    if(queue.isQueueEmpty())
+                        System.out.print("Queue is Empty ");
+                    else
+                    {
+                        d=queue.peek();
+                        System.out.println("First Student :  "+d);
+                    }
+                    break;
+                case 4:
+                    if(queue.isQueueEmpty())
+                        System.out.print("Queue is Empty ");
+                    else
+                    {
+                        d=queue.peekLast();
+                        System.out.println("Last Student:-  "+d);
+                    }
+                    break;
+                case 5:
+                    if(queue.isQueueEmpty())
+                        System.out.println("Queue is Empty ");
+                    else
+                    {
+                        System.out.println("Display All Student ");
+                        queue.display();
+                        
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice ");
+                }
+            }
+            System.out.println(" ");
+        }
+    }
+	
+	
+	
+	
+	
+
+}
